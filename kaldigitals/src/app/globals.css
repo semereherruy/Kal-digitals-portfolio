@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+/* ── Design Tokens ────────────────────────────────────────────────────────── */
+:root {
+  /* Base palette */
+  --navy:        #0D1B2A;
+  --navy-mid:    #1A2F45;
+  --navy-light:  #243D56;
+  --cream:       #F8F4EF;
+  --cream-dark:  #EDE7DC;
+  --white:       #FFFFFF;
+
+  /* Ethiopian-inspired accents */
+  --gold:        #C9962A;
+  --gold-light:  #E0B04A;
+  --gold-dim:    #8B6A1C;
+  --terra:       #8B4A2F;
+  --terra-light: #B06040;
+
+  /* Text */
+  --text-primary:   var(--navy);
+  --text-secondary: #4A5568;
+  --text-muted:     #718096;
+  --text-on-dark:   var(--cream);
+
+  /* Fonts — supplied by next/font/google as CSS variables */
+  --font-sans:    var(--font-inter, 'Inter', system-ui, sans-serif);
+  --font-serif:   var(--font-cormorant, 'Cormorant Garamond', Georgia, serif);
+  --font-ethiopic-stack: var(--font-ethiopic, 'Noto Sans Ethiopic', sans-serif);
+
+  /* Layout */
+  --max-w: 1280px;
+  --section-py: 7rem;
+
+  /* Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 2rem;
+
+  /* Shadow */
+  --shadow-sm:   0 1px 3px rgba(13,27,42,0.08), 0 1px 2px rgba(13,27,42,0.04);
+  --shadow-md:   0 4px 20px rgba(13,27,42,0.10), 0 2px 6px rgba(13,27,42,0.06);
+  --shadow-lg:   0 20px 60px rgba(13,27,42,0.15), 0 4px 16px rgba(13,27,42,0.08);
+  --shadow-gold: 0 0 0 3px rgba(201,150,42,0.25);
+}
+
+/* ── Reset + Base ─────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--cream);
+  color: var(--text-primary);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* ── Typography ────────────────────────────────────────────────────────────── */
+/* Note: NO forced color here — each component sets its own heading color
+   based on its background context (dark vs light section). */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.display-xl {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.display-lg {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+.section-label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--navy-light); border-radius: 3px; }
+
+/* ── Focus ────────────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Selection ────────────────────────────────────────────────────────────── */
+::selection { background: var(--gold); color: var(--navy); }
+
+/* ── Ethiopian Tibeb Pattern ──────────────────────────────────────────────── */
+.eth-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C9962A' stroke-width='0.5' opacity='0.18'%3E%3Crect x='10' y='10' width='10' height='10'/%3E%3Crect x='40' y='10' width='10' height='10'/%3E%3Crect x='10' y='40' width='10' height='10'/%3E%3Crect x='40' y='40' width='10' height='10'/%3E%3Cline x1='0' y1='30' x2='60' y2='30'/%3E%3Cline x1='30' y1='0' x2='30' y2='60'/%3E%3Cline x1='15' y1='15' x2='45' y2='45'/%3E%3Cline x1='45' y1='15' x2='15' y2='45'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ── Ethiopic script font fallback ───────────────────────────────────────── */
+.font-ethiopic {
+  font-family: var(--font-ethiopic-stack);
+}
+
+/* ── Layout primitives ────────────────────────────────────────────────────── */
+.container-site {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 4rem);
+}
+
+.gold-rule {
+  display: block;
+  width: 3rem;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 1px;
+}
+
+img { max-width: 100%; height: auto; display: block; }
