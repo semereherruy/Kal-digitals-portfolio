@@ -60,7 +60,7 @@ export default function Navbar() {
             : 'bg-transparent'
         )}
       >
-        <nav className="container-site flex items-center justify-between h-20">
+        <nav className="container-site flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a
             href="#home"
@@ -70,7 +70,7 @@ export default function Navbar() {
           >
             {/* Monogram mark */}
             <span
-              className="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold text-white shrink-0 transition-transform duration-300 group-hover:scale-105"
+              className="w-8 h-8 md:w-9 md:h-9 rounded-lg flex items-center justify-center text-xs md:text-sm font-bold text-white shrink-0 transition-transform duration-300 group-hover:scale-105"
               style={{ background: 'linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%)' }}
               aria-hidden="true"
             >
@@ -78,7 +78,7 @@ export default function Navbar() {
             </span>
             <span
               className={cn(
-                'font-serif font-semibold text-xl tracking-tight transition-colors duration-300',
+                'font-serif font-semibold text-lg md:text-xl tracking-tight transition-colors duration-300',
                 scrolled ? 'text-[var(--navy)]' : 'text-white'
               )}
             >
@@ -87,7 +87,7 @@ export default function Navbar() {
           </a>
 
           {/* Desktop nav */}
-          <ul className="hidden lg:flex items-center gap-1" role="list">
+          <ul className="hidden lg:flex items-center gap-0.5" role="list">
             {NAV_ITEMS.map((item) => (
               <li key={item.key}>
                 <button
@@ -168,8 +168,7 @@ export default function Navbar() {
             {/* CTA */}
             <button
               onClick={() => handleNav('#contact')}
-              className="px-5 py-2.5 text-sm font-semibold rounded-xl text-white transition-all duration-200 hover:opacity-90 hover:shadow-[0_4px_16px_rgba(201,150,42,0.5)] hover:scale-[1.02] active:scale-[0.98]"
-              style={{ background: 'linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%)' }}
+              className="btn-primary"
             >
               {t('nav.cta')}
             </button>
@@ -178,14 +177,14 @@ export default function Navbar() {
           {/* Mobile hamburger */}
           <button
             className={cn(
-              'lg:hidden p-2 rounded-md transition-colors',
+              'lg:hidden p-2 rounded-lg transition-colors',
               scrolled ? 'text-[var(--navy)]' : 'text-white'
             )}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileOpen}
           >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </nav>
       </header>
@@ -209,26 +208,26 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 280, damping: 30 }}
-              className="fixed right-0 top-0 bottom-0 z-50 w-72 bg-white shadow-2xl flex flex-col lg:hidden"
+              className="fixed right-0 top-0 bottom-0 z-50 w-[280px] bg-white shadow-2xl flex flex-col lg:hidden"
               aria-label="Mobile navigation"
             >
-              <div className="flex items-center justify-between px-6 h-20 border-b border-[var(--cream-dark)]">
+              <div className="flex items-center justify-between px-5 h-16 border-b border-[var(--cream-dark)]">
                 <span className="font-serif font-semibold text-lg text-[var(--navy)]">Kal Digitals</span>
                 <button
                   onClick={() => setMobileOpen(false)}
                   aria-label="Close menu"
-                  className="p-2 text-[var(--text-secondary)] hover:text-[var(--navy)] transition-colors"
+                  className="p-2 text-[var(--text-secondary)] hover:text-[var(--navy)] transition-colors rounded-lg hover:bg-[var(--cream)]"
                 >
                   <X size={20} />
                 </button>
               </div>
 
-              <ul className="flex-1 flex flex-col px-4 py-6 gap-1 overflow-y-auto" role="list">
+              <ul className="flex-1 flex flex-col px-3 py-4 gap-1 overflow-y-auto" role="list">
                 {NAV_ITEMS.map((item) => (
                   <li key={item.key}>
                     <button
                       onClick={() => handleNav(item.href)}
-                      className="w-full text-left px-4 py-3 rounded-lg text-[var(--text-secondary)] hover:text-[var(--navy)] hover:bg-[var(--cream)] text-sm font-medium transition-all"
+                      className="w-full text-left px-4 py-3.5 rounded-xl text-[var(--text-secondary)] hover:text-[var(--navy)] hover:bg-[var(--cream)] text-base font-medium transition-all"
                     >
                       {t(item.key)}
                     </button>
@@ -237,15 +236,15 @@ export default function Navbar() {
               </ul>
 
               {/* Mobile language selector */}
-              <div className="px-4 pb-4">
-                <p className="px-4 pb-2 text-xs text-[var(--text-muted)] font-medium uppercase tracking-widest">Language</p>
+              <div className="px-4 pb-3">
+                <p className="px-4 pb-2 text-xs text-[var(--text-muted)] font-semibold uppercase tracking-widest">Language</p>
                 <div className="flex gap-2">
                   {LANGUAGES.map((l) => (
                     <button
                       key={l.code}
                       onClick={() => { setLang(l.code as Language); }}
                       className={cn(
-                        'flex-1 py-2 rounded-lg text-xs font-semibold font-ethiopic transition-all hover:scale-105',
+                        'flex-1 py-2.5 rounded-xl text-sm font-semibold font-ethiopic transition-all hover:scale-[1.02]',
                         lang === l.code
                           ? 'bg-[var(--navy)] text-white'
                           : 'bg-[var(--cream)] text-[var(--text-secondary)] hover:bg-[var(--cream-dark)]'
@@ -257,10 +256,10 @@ export default function Navbar() {
                 </div>
               </div>
 
-              <div className="px-4 pb-8">
+              <div className="px-4 pb-6">
                 <button
                   onClick={() => handleNav('#contact')}
-                  className="w-full py-3.5 text-sm font-semibold rounded-xl text-white transition-all hover:shadow-[var(--shadow-gold)]"
+                  className="w-full py-3.5 text-base font-semibold rounded-xl text-white transition-all hover:shadow-[var(--shadow-gold)]"
                   style={{ background: 'linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%)' }}
                 >
                   {t('nav.cta')}

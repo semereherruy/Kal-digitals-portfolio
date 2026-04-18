@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Star } from 'lucide-react';
+import { Star, Quote } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { TESTIMONIALS } from '@/data/siteContent';
 import { fadeUp, stagger, viewport } from '@/lib/utils';
@@ -18,46 +18,40 @@ export default function Testimonials() {
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          className="mb-12 md:mb-16 text-center max-w-2xl mx-auto"
+          className="mb-10 md:mb-14 text-center max-w-2xl mx-auto"
         >
           <motion.span variants={fadeUp} className="section-label block mb-4">
             Testimonials
           </motion.span>
-          <motion.h2 variants={fadeUp} className="display-lg text-[var(--navy)] mb-5">
+          <motion.h2 variants={fadeUp} className="display-lg text-[var(--navy)] mb-4">
             {t('testimonials.heading')}
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-[var(--text-secondary)] leading-relaxed text-lg">
+          <motion.p variants={fadeUp} className="text-[var(--text-secondary)] leading-relaxed text-base md:text-lg">
             {t('testimonials.sub')}
           </motion.p>
         </motion.div>
 
-        {/* Testimonial grid with staggered cards */}
+        {/* Testimonial grid */}
         <motion.div
           variants={stagger(0.12)}
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 max-w-4xl mx-auto"
         >
           {TESTIMONIALS.map((item, i) => (
             <motion.blockquote
               key={item.id}
               variants={fadeUp}
-              className={`group relative rounded-2xl p-7 transition-all duration-300 hover:shadow-[var(--shadow-lg)] hover:-translate-y-1 border ${
-                i % 2 === 1 ? 'md:translate-y-6' : ''
-              }`}
-              style={{
-                background: 'var(--white)',
-                borderColor: 'var(--cream-dark)',
-              }}
+              className="card group relative overflow-hidden"
             >
-              {/* Gold quote mark */}
+              {/* Quote icon */}
               <div
-                className="absolute top-5 right-6 text-5xl font-serif leading-none opacity-15 select-none"
+                className="absolute top-4 right-5 text-4xl font-serif leading-none opacity-10 select-none"
                 style={{ color: 'var(--gold)' }}
                 aria-hidden="true"
               >
-                &ldquo;
+                <Quote size={36} />
               </div>
 
               {/* Stars */}
@@ -65,7 +59,7 @@ export default function Testimonials() {
                 {Array.from({ length: item.rating }, (_, j) => (
                   <Star
                     key={j}
-                    size={14}
+                    size={12}
                     fill="var(--gold)"
                     stroke="var(--gold)"
                     strokeWidth={1}
@@ -99,9 +93,9 @@ export default function Testimonials() {
 
               {/* Hover accent top-left corner */}
               <div
-                className="absolute top-0 left-0 w-12 h-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-tl-2xl"
+                className="absolute top-0 left-0 w-16 h-16 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(201,150,42,0.15) 0%, transparent 100%)',
+                  background: 'linear-gradient(135deg, rgba(201,150,42,0.12) 0%, transparent 60%)',
                 }}
                 aria-hidden="true"
               />

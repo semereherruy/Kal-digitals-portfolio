@@ -27,22 +27,22 @@ export default function Process() {
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          className="mb-12 md:mb-16 text-center max-w-2xl mx-auto"
+          className="mb-10 md:mb-14 text-center max-w-2xl mx-auto"
         >
           <motion.span variants={fadeUp} className="section-label block mb-4">
             Process
           </motion.span>
-          <motion.h2 variants={fadeUp} className="display-lg text-[var(--navy)] mb-5">
+          <motion.h2 variants={fadeUp} className="display-lg text-[var(--navy)] mb-4">
             {t('process.heading')}
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-[var(--text-secondary)] leading-relaxed text-lg">
+          <motion.p variants={fadeUp} className="text-[var(--text-secondary)] leading-relaxed text-base md:text-lg">
             {t('process.sub')}
           </motion.p>
         </motion.div>
 
-        {/* Timeline */}
+        {/* Timeline - stacked on mobile, horizontal on larger screens */}
         <motion.div
-          variants={stagger(0.12)}
+          variants={stagger(0.1)}
           initial="hidden"
           whileInView="show"
           viewport={viewport}
@@ -55,7 +55,7 @@ export default function Process() {
             aria-hidden="true"
           />
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-2">
             {PROCESS_STEPS.map((step) => {
               const Icon = ICON_MAP[step.icon as IconName] ?? Search;
 
@@ -63,19 +63,19 @@ export default function Process() {
                 <motion.div
                   key={step.id}
                   variants={fadeUp}
-                  className="group flex flex-col items-center text-center gap-4"
+                  className="group flex flex-col items-center text-center gap-3"
                 >
                   {/* Step circle */}
                   <div className="relative">
                     <div
-                      className="w-16 h-16 rounded-full flex items-center justify-center border-2 transition-all duration-300 group-hover:border-[var(--gold)] group-hover:shadow-[var(--shadow-gold)]"
+                      className="w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center border-2 transition-all duration-300 group-hover:border-[var(--gold)] group-hover:shadow-[var(--shadow-gold)]"
                       style={{
                         background: 'var(--white)',
                         borderColor: 'var(--cream-dark)',
                       }}
                     >
                       <Icon
-                        size={22}
+                        size={20} md={22}
                         strokeWidth={1.5}
                         className="text-[var(--navy)] group-hover:text-[var(--gold)] transition-colors duration-300"
                       />
@@ -83,7 +83,7 @@ export default function Process() {
 
                     {/* Number badge */}
                     <span
-                      className="absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
+                      className="absolute -top-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
                       style={{ background: 'var(--gold)' }}
                     >
                       {step.number}
@@ -95,7 +95,7 @@ export default function Process() {
                     <h3 className="text-sm font-semibold text-[var(--navy)] mb-1 font-serif">
                       {t(`process.${step.id}.title`)}
                     </h3>
-                    <p className="text-xs text-[var(--text-muted)] leading-relaxed max-w-[12rem] mx-auto">
+                    <p className="text-xs text-[var(--text-muted)] leading-relaxed max-w-[11rem] mx-auto">
                       {t(`process.${step.id}.desc`)}
                     </p>
                   </div>

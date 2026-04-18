@@ -34,12 +34,12 @@ export default function Services() {
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          className="mb-16 md:mb-20 max-w-2xl"
+          className="mb-12 md:mb-16 max-w-2xl"
         >
           <motion.span variants={fadeUp} className="section-label block mb-4">
             {t('services.heading')}
           </motion.span>
-          <motion.h2 variants={fadeUp} className="display-lg text-[var(--navy)] mb-5">
+          <motion.h2 variants={fadeUp} className="display-lg text-[var(--navy)] mb-4">
             {t('services.sub')}
           </motion.h2>
         </motion.div>
@@ -54,7 +54,7 @@ export default function Services() {
             className="group relative rounded-2xl overflow-hidden mb-6 md:mb-8 flex flex-col md:flex-row items-stretch"
             style={{
               background: 'linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%)',
-              minHeight: '220px',
+              minHeight: '200px',
             }}
           >
             {/* Accent side bar */}
@@ -65,9 +65,9 @@ export default function Services() {
             />
 
             {/* Icon area */}
-            <div className="md:w-56 flex items-center justify-center p-10">
+            <div className="md:w-48 flex items-center justify-center p-8 md:p-10">
               <div
-                className="w-16 h-16 rounded-xl flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 group-hover:shadow-[var(--shadow-gold)]"
+                className="w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 group-hover:shadow-[var(--shadow-gold)]"
                 style={{ background: 'rgba(201,150,42,0.15)', border: '1px solid rgba(201,150,42,0.3)' }}
               >
                 <ServiceIcon name={featured.icon} />
@@ -75,23 +75,23 @@ export default function Services() {
             </div>
 
             {/* Text */}
-            <div className="flex-1 flex flex-col justify-center px-8 py-10 md:px-0 md:py-12">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="w-8 h-px bg-[var(--gold)]" aria-hidden="true" />
+            <div className="flex-1 flex flex-col justify-center px-6 md:px-0 md:py-8">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-6 h-px bg-[var(--gold)]" aria-hidden="true" />
                 <p className="text-xs uppercase tracking-widest text-[var(--gold)] font-semibold">
                   Featured Service
                 </p>
               </div>
-              <h3 className="text-2xl md:text-3xl font-serif font-semibold text-white mb-3">
+              <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-semibold text-white mb-2 md:mb-3">
                 {t(`services.${featured.id}.title`)}
               </h3>
-              <p className="text-white/65 leading-relaxed max-w-lg">
+              <p className="text-white/60 leading-relaxed max-w-lg text-sm md:text-base">
                 {t(`services.${featured.id}.desc`)}
               </p>
             </div>
 
             {/* Decorative corner motif */}
-            <div className="absolute -top-12 -right-12 w-40 h-40 rounded-full opacity-10"
+            <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full opacity-10"
               style={{ background: 'radial-gradient(circle, var(--gold), transparent)' }}
               aria-hidden="true"
             />
@@ -104,7 +104,7 @@ export default function Services() {
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5"
         >
           {rest.map((service) => {
             const Icon = ICON_MAP[service.icon as keyof typeof ICON_MAP] ?? Palette;
@@ -112,11 +112,7 @@ export default function Services() {
               <motion.div
                 key={service.id}
                 variants={fadeUp}
-                className="group relative rounded-xl p-6 md:p-7 transition-all duration-300 hover:shadow-[var(--shadow-lg)] hover:-translate-y-1"
-                style={{
-                  background: 'var(--white)',
-                  border: '1px solid var(--cream-dark)',
-                }}
+                className="card group hover:-translate-y-1.5"
               >
                 {/* Top accent line on hover */}
                 <div
@@ -131,18 +127,18 @@ export default function Services() {
                 {/* Icon */}
                 <div className="mb-4">
                   <div
-                    className="w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:text-[var(--gold)] group-hover:shadow-[0_0_0_3px_rgba(201,150,42,0.15)]"
+                    className="w-11 h-11 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:text-[var(--gold)] group-hover:shadow-[0_0_0_3px_rgba(201,150,42,0.15)]"
                     style={{ background: 'var(--cream)', border: '1px solid var(--cream-dark)' }}
                   >
-                    <Icon size={22} strokeWidth={1.5} />
+                    <Icon size={20} strokeWidth={1.5} />
                   </div>
                 </div>
 
                 {/* Content */}
-                <h3 className="text-lg font-serif font-semibold text-[var(--navy)] mb-2">
+                <h3 className="text-base font-serif font-semibold text-[var(--navy)] mb-2">
                   {t(`services.${service.id}.title`)}
                 </h3>
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                <p className="text-sm text-[var(--text-secondary)] leading-relaxed line-clamp-3">
                   {t(`services.${service.id}.desc`)}
                 </p>
               </motion.div>
