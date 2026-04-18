@@ -43,7 +43,7 @@ export default function TrustStrip() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative py-14 overflow-hidden" style={{ background: 'var(--navy)' }}>
+    <section className="section-sm relative overflow-hidden" style={{ background: 'var(--navy)' }}>
       {/* Subtle horizontal rule accent — Ethiopian-inspired */}
       <div
         className="absolute top-0 inset-x-0 h-px"
@@ -57,11 +57,11 @@ export default function TrustStrip() {
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-8 text-center"
+          className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-8 text-center"
         >
           {METRICS.map((metric) => (
             <motion.div key={metric.labelKey} variants={fadeUp} className="flex flex-col items-center gap-2">
-              <dt className="text-4xl font-serif font-bold text-white">
+              <dt className="text-4xl md:text-5xl font-serif font-bold text-white">
                 <CountUp target={metric.value} suffix={metric.suffix} />
               </dt>
               <dd className="text-xs uppercase tracking-widest text-white/50 font-medium leading-tight max-w-[10rem]">

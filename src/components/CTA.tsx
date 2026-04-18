@@ -4,16 +4,17 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { fadeUp, stagger, viewport } from '@/lib/utils';
+import { smoothScrollTo } from '@/lib/utils';
 
 export default function CTA() {
   const { t } = useLanguage();
 
   const handleScroll = (id: string) => {
-    document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
+    smoothScrollTo(id);
   };
 
   return (
-    <section className="py-24 relative overflow-hidden" style={{ background: 'var(--navy)' }}>
+    <section className="section relative overflow-hidden" style={{ background: 'var(--navy)' }}>
       {/* Subtle Ethiopian pattern texture */}
       <div className="absolute inset-0 eth-pattern opacity-20 pointer-events-none" aria-hidden="true" />
 

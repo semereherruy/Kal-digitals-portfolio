@@ -5,6 +5,16 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Float, MeshDistortMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 
+/* Pre-computed particle positions to avoid impure calls during render */
+const DEFAULT_PARTICLE_COUNT = 80;
+const DEFAULT_POSITIONS = (() => {
+  const arr = new Float32Array(DEFAULT_PARTICLE_COUNT * 3);
+  for (let i = 0; i < DEFAULT_PARTICLE_COUNT * 3; i++) {
+    arr[i] = (Math.random() - 0.5) * 16;
+  }
+  return arr;
+})();
+
 /* Floating distorted sphere — premium ambient element */
 function AbstractSphere() {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -22,7 +32,7 @@ function AbstractSphere() {
       <mesh ref={meshRef} position={[3, 0.5, -1.5]} scale={2.6}>
         <icosahedronGeometry args={[1, 4]} />
         <MeshDistortMaterial
-          color="#3A6A8A"
+          color="#2A6A8A"
           distort={0.3}
           speed={1.8}
           roughness={0.2}
@@ -65,12 +75,7 @@ function RingAccent() {
 }
 
 /* Ambient particles field */
-function Particles({ count = 80 }: { count?: number }) {
-  const positions = useRef(
-    new Float32Array(
-      Array.from({ length: count * 3 }, () => (Math.random() - 0.5) * 16)
-    )
-  );
+function Particles({ count: _count }: { count?: number }) {
   const meshRef = useRef<THREE.Points>(null);
 
   useFrame(({ clock }) => {
@@ -83,7 +88,7 @@ function Particles({ count = 80 }: { count?: number }) {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          args={[positions.current, 3]}
+          args={[DEFAULT_POSITIONS, 3]}
         />
       </bufferGeometry>
       <pointsMaterial

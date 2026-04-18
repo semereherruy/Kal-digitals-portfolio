@@ -4,7 +4,9 @@ import { Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Play } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { fadeUp, stagger, viewport } from '@/lib/utils';
+import { fadeUp, stagger } from '@/lib/utils';
+import { smoothScrollTo } from '@/lib/utils';
+import { ThreeSceneSkeleton } from '@/components/ui/Skeleton';
 
 // Dynamically import the Three.js scene — no SSR
 const ThreeScene = lazy(() => import('./ThreeScene'));
@@ -13,7 +15,7 @@ export default function Hero() {
   const { t } = useLanguage();
 
   const handleScroll = (id: string) => {
-    document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
+    smoothScrollTo(id);
   };
 
   return (
@@ -22,16 +24,16 @@ export default function Hero() {
       className="relative min-h-screen flex flex-col justify-center overflow-hidden"
       style={{ background: 'linear-gradient(150deg, var(--navy) 0%, var(--navy-mid) 60%, #1c3a52 100%)' }}
     >
-      {/* Three.js background scene */}
+      {/* Three.js background scene with parallax */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <Suspense fallback={null}>
+        <Suspense fallback={<ThreeSceneSkeleton />}>
           <ThreeScene />
         </Suspense>
       </div>
 
       {/* Subtle Ethiopian pattern overlay */}
       <div
-        className="absolute inset-0 eth-pattern opacity-30 pointer-events-none"
+        className="absolute inset-0 eth-pattern opacity-20 pointer-events-none"
         aria-hidden="true"
       />
 
@@ -42,8 +44,8 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Content */}
-      <div className="container-site relative z-10 pt-32 pb-20">
+      {/* Content with subtle parallax on scroll */}
+      <div className="container-site relative z-10 pt-32 pb-20 md:pt-36 md:pb-24">
         <motion.div
           variants={stagger(0.15)}
           initial="hidden"
@@ -52,8 +54,8 @@ export default function Hero() {
         >
           {/* Location badge */}
           <motion.div variants={fadeUp} className="mb-8">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm text-xs font-medium text-white/80">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)]" />
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-xs font-medium text-white/80 shadow-lg">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
               Mekelle, Tigray, Ethiopia
             </span>
           </motion.div>
@@ -61,7 +63,7 @@ export default function Hero() {
           {/* Headline */}
           <motion.h1
             variants={fadeUp}
-            className="display-xl text-white mb-6 leading-tight"
+            className="display-xl text-white mb-6 leading-tight tracking-tight"
           >
             {t('hero.headline')}
           </motion.h1>
@@ -69,7 +71,7 @@ export default function Hero() {
           {/* Supporting copy */}
           <motion.p
             variants={fadeUp}
-            className="text-lg text-white/75 leading-relaxed mb-10 max-w-xl font-sans"
+            className="text-lg md:text-xl text-white/75 leading-relaxed mb-10 max-w-xl font-sans"
           >
             {t('hero.sub')}
           </motion.p>
@@ -78,7 +80,7 @@ export default function Hero() {
           <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
             <button
               onClick={() => handleScroll('#contact')}
-              className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-white text-sm transition-all duration-200 hover:shadow-[0_8px_32px_rgba(201,150,42,0.4)]"
+              className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-white text-sm transition-all duration-200 hover:shadow-[0_8px_32px_rgba(201,150,42,0.5)] hover:scale-[1.02] active:scale-[0.98]"
               style={{ background: 'linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%)' }}
             >
               {t('hero.cta.primary')}
@@ -87,7 +89,7 @@ export default function Hero() {
 
             <button
               onClick={() => handleScroll('#portfolio')}
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-white text-sm border border-white/30 bg-white/10 backdrop-blur-sm transition-all duration-200 hover:bg-white/20"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-white text-sm border border-white/30 bg-white/10 backdrop-blur-sm transition-all duration-200 hover:bg-white/20 hover:border-white/50 hover:scale-[1.02] active:scale-[0.98]"
             >
               <Play size={14} />
               {t('hero.cta.secondary')}

@@ -36,18 +36,33 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: '', email: '', subject: '', message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Frontend-only — placeholder behavior
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    // Simulate form submission - replace with actual API call
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1200));
+      setIsSubmitting(false);
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } catch {
+      setIsSubmitting(false);
+      setSubmitStatus('error');
+    }
   };
 
   return (
-    <section id="contact" className="py-28" style={{ background: 'var(--cream)' }}>
+    <section id="contact" className="section" style={{ background: 'var(--cream)' }}>
       <div className="container-site">
         {/* Header */}
         <motion.div
@@ -55,7 +70,7 @@ export default function Contact() {
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          className="mb-16 text-center max-w-2xl mx-auto"
+          className="mb-12 md:mb-16 text-center max-w-2xl mx-auto"
         >
           <motion.span variants={fadeUp} className="section-label block mb-4">
             Contact
@@ -166,6 +181,28 @@ export default function Contact() {
               className="rounded-2xl p-8 md:p-10 space-y-5"
               style={{ background: 'var(--white)', border: '1px solid var(--cream-dark)', boxShadow: 'var(--shadow-sm)' }}
             >
+              {/* Success/Error messages */}
+              {submitStatus === 'success' && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="rounded-lg p-4 text-sm"
+                  style={{ background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)', color: '#16a34a' }}
+                >
+                  Message sent successfully! We&apos;ll get back to you soon.
+                </motion.div>
+              )}
+              {submitStatus === 'error' && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="rounded-lg p-4 text-sm"
+                  style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', color: '#dc2626' }}
+                >
+                  Something went wrong. Please try again or contact us directly.
+                </motion.div>
+              )}
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label htmlFor="contact-name" className="block text-xs font-semibold uppercase tracking-widest text-[var(--text-muted)] mb-2">
@@ -175,9 +212,10 @@ export default function Contact() {
                     id="contact-name"
                     name="name"
                     type="text"
+                    required
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg text-sm border text-[var(--navy)] focus:outline-none focus:ring-2 transition-all"
+                    className="w-full px-4 py-3 rounded-lg text-sm border text-[var(--navy)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--gold)] focus:border-transparent transition-all"
                     style={{ background: 'var(--cream)', borderColor: 'var(--cream-dark)' }}
                     placeholder="Kebede Alemu"
                   />
@@ -190,9 +228,10 @@ export default function Contact() {
                     id="contact-email"
                     name="email"
                     type="email"
+                    required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg text-sm border text-[var(--navy)] focus:outline-none focus:ring-2 transition-all"
+                    className="w-full px-4 py-3 rounded-lg text-sm border text-[var(--navy)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--gold)] focus:border-transparent transition-all"
                     style={{ background: 'var(--cream)', borderColor: 'var(--cream-dark)' }}
                     placeholder="kebede@business.com"
                   />
@@ -207,9 +246,10 @@ export default function Contact() {
                   id="contact-subject"
                   name="subject"
                   type="text"
+                  required
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg text-sm border text-[var(--navy)] focus:outline-none focus:ring-2 transition-all"
+                  className="w-full px-4 py-3 rounded-lg text-sm border text-[var(--navy)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--gold)] focus:border-transparent transition-all"
                   style={{ background: 'var(--cream)', borderColor: 'var(--cream-dark)' }}
                   placeholder="Website redesign project"
                 />
@@ -223,9 +263,10 @@ export default function Contact() {
                   id="contact-message"
                   name="message"
                   rows={5}
+                  required
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg text-sm border text-[var(--navy)] focus:outline-none focus:ring-2 transition-all resize-none"
+                  className="w-full px-4 py-3 rounded-lg text-sm border text-[var(--navy)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--gold)] focus:border-transparent transition-all resize-none"
                   style={{ background: 'var(--cream)', borderColor: 'var(--cream-dark)' }}
                   placeholder="Tell us about your project..."
                 />
@@ -233,11 +274,25 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-white text-sm transition-all duration-200 hover:shadow-[0_4px_16px_rgba(201,150,42,0.35)]"
+                disabled={isSubmitting}
+                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-white text-sm transition-all duration-200 hover:shadow-[0_4px_16px_rgba(201,150,42,0.5)] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
                 style={{ background: 'linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%)' }}
               >
-                {t('contact.form.send')}
-                <Send size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                {isSubmitting ? (
+                  <>
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                      className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                    />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    {t('contact.form.send')}
+                    <Send size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </>
+                )}
               </button>
             </form>
           </motion.div>

@@ -19,7 +19,7 @@ export default function Process() {
   const { t } = useLanguage();
 
   return (
-    <section id="process" className="py-28 overflow-hidden" style={{ background: 'var(--cream)' }}>
+    <section id="process" className="section" style={{ background: 'var(--cream)' }}>
       <div className="container-site">
         {/* Header */}
         <motion.div
@@ -27,7 +27,7 @@ export default function Process() {
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          className="mb-20 text-center max-w-2xl mx-auto"
+          className="mb-12 md:mb-16 text-center max-w-2xl mx-auto"
         >
           <motion.span variants={fadeUp} className="section-label block mb-4">
             Process

@@ -2,6 +2,7 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
 import { CONTACT } from '@/data/siteContent';
+import { smoothScrollTo } from '@/lib/utils';
 
 /* Custom SVG social icons */
 function FacebookIcon({ size = 15 }: { size?: number }) {
@@ -53,7 +54,7 @@ export default function Footer() {
   const { t } = useLanguage();
 
   const handleNav = (href: string) => {
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    smoothScrollTo(href);
   };
 
   return (

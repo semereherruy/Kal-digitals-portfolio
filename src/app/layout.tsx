@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Cormorant_Garamond, Noto_Sans_Ethiopic } from 'next/font/google';
 import './globals.css';
 import { LanguageProvider } from '@/contexts/LanguageContext';
+import { SmoothScrollProvider } from '@/components/SmoothScrollProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -52,7 +53,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${cormorant.variable} ${notoEthiopic.variable} h-full`}>
       <body className="min-h-full antialiased">
-        <LanguageProvider>{children}</LanguageProvider>
+        <SmoothScrollProvider>
+          <LanguageProvider>{children}</LanguageProvider>
+        </SmoothScrollProvider>
       </body>
     </html>
   );

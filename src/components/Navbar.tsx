@@ -6,6 +6,7 @@ import { Menu, X, ChevronDown, Globe } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { LANGUAGES, type Language } from '@/data/siteContent';
 import { cn } from '@/lib/utils';
+import { smoothScrollTo } from '@/lib/utils';
 
 const NAV_ITEMS = [
   { key: 'nav.home', href: '#home' },
@@ -44,8 +45,7 @@ export default function Navbar() {
 
   const handleNav = (href: string) => {
     setMobileOpen(false);
-    const el = document.querySelector(href);
-    el?.scrollIntoView({ behavior: 'smooth' });
+    smoothScrollTo(href);
   };
 
   const currentLang = LANGUAGES.find((l) => l.code === lang);
@@ -56,7 +56,7 @@ export default function Navbar() {
         className={cn(
           'fixed top-0 inset-x-0 z-50 transition-all duration-300',
           scrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-[0_2px_20px_rgba(13,27,42,0.08)]'
+            ? 'bg-white/98 backdrop-blur-xl shadow-[0_4px_30px_rgba(13,27,42,0.08)]'
             : 'bg-transparent'
         )}
       >
@@ -70,7 +70,7 @@ export default function Navbar() {
           >
             {/* Monogram mark */}
             <span
-              className="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold text-white shrink-0"
+              className="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold text-white shrink-0 transition-transform duration-300 group-hover:scale-105"
               style={{ background: 'linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%)' }}
               aria-hidden="true"
             >
@@ -78,7 +78,7 @@ export default function Navbar() {
             </span>
             <span
               className={cn(
-                'font-serif font-semibold text-xl tracking-tight transition-colors',
+                'font-serif font-semibold text-xl tracking-tight transition-colors duration-300',
                 scrolled ? 'text-[var(--navy)]' : 'text-white'
               )}
             >
@@ -93,7 +93,7 @@ export default function Navbar() {
                 <button
                   onClick={() => handleNav(item.href)}
                   className={cn(
-                    'px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150',
+                    'px-3 py-2 text-sm font-medium rounded-md transition-all duration-150',
                     scrolled
                       ? 'text-[var(--text-secondary)] hover:text-[var(--navy)] hover:bg-[var(--cream)]'
                       : 'text-white/80 hover:text-white hover:bg-white/10'
@@ -115,7 +115,7 @@ export default function Navbar() {
                 aria-haspopup="listbox"
                 onClick={() => setLangOpen(!langOpen)}
                 className={cn(
-                  'flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-md transition-colors',
+                  'flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-md transition-all duration-200',
                   scrolled
                     ? 'text-[var(--text-secondary)] hover:text-[var(--navy)] hover:bg-[var(--cream)]'
                     : 'text-white/80 hover:text-white hover:bg-white/10'
@@ -168,7 +168,7 @@ export default function Navbar() {
             {/* CTA */}
             <button
               onClick={() => handleNav('#contact')}
-              className="px-5 py-2.5 text-sm font-semibold rounded-xl text-white transition-all duration-200 hover:opacity-90 hover:shadow-[0_4px_16px_rgba(201,150,42,0.35)]"
+              className="px-5 py-2.5 text-sm font-semibold rounded-xl text-white transition-all duration-200 hover:opacity-90 hover:shadow-[0_4px_16px_rgba(201,150,42,0.5)] hover:scale-[1.02] active:scale-[0.98]"
               style={{ background: 'linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%)' }}
             >
               {t('nav.cta')}
@@ -198,8 +198,9 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-40 bg-navy/50 backdrop-blur-sm lg:hidden"
-              style={{ backgroundColor: 'rgba(13,27,42,0.5)' }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-40 bg-navy/60 backdrop-blur-xl lg:hidden"
+              style={{ backgroundColor: 'rgba(13,27,42,0.6)' }}
               onClick={() => setMobileOpen(false)}
               aria-hidden="true"
             />
@@ -216,7 +217,7 @@ export default function Navbar() {
                 <button
                   onClick={() => setMobileOpen(false)}
                   aria-label="Close menu"
-                  className="p-2 text-[var(--text-secondary)] hover:text-[var(--navy)]"
+                  className="p-2 text-[var(--text-secondary)] hover:text-[var(--navy)] transition-colors"
                 >
                   <X size={20} />
                 </button>
@@ -227,7 +228,7 @@ export default function Navbar() {
                   <li key={item.key}>
                     <button
                       onClick={() => handleNav(item.href)}
-                      className="w-full text-left px-4 py-3 rounded-lg text-[var(--text-secondary)] hover:text-[var(--navy)] hover:bg-[var(--cream)] text-sm font-medium transition-colors"
+                      className="w-full text-left px-4 py-3 rounded-lg text-[var(--text-secondary)] hover:text-[var(--navy)] hover:bg-[var(--cream)] text-sm font-medium transition-all"
                     >
                       {t(item.key)}
                     </button>
@@ -244,7 +245,7 @@ export default function Navbar() {
                       key={l.code}
                       onClick={() => { setLang(l.code as Language); }}
                       className={cn(
-                        'flex-1 py-2 rounded-lg text-xs font-semibold font-ethiopic transition-colors',
+                        'flex-1 py-2 rounded-lg text-xs font-semibold font-ethiopic transition-all hover:scale-105',
                         lang === l.code
                           ? 'bg-[var(--navy)] text-white'
                           : 'bg-[var(--cream)] text-[var(--text-secondary)] hover:bg-[var(--cream-dark)]'
@@ -259,7 +260,7 @@ export default function Navbar() {
               <div className="px-4 pb-8">
                 <button
                   onClick={() => handleNav('#contact')}
-                  className="w-full py-3.5 text-sm font-semibold rounded-xl text-white transition-all"
+                  className="w-full py-3.5 text-sm font-semibold rounded-xl text-white transition-all hover:shadow-[var(--shadow-gold)]"
                   style={{ background: 'linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%)' }}
                 >
                   {t('nav.cta')}

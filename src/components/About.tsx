@@ -10,11 +10,11 @@ export default function About() {
   return (
     <section
       id="about"
-      className="py-28"
+      className="section"
       style={{ background: 'var(--white)' }}
     >
       <div className="container-site">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
           {/* Left — Narrative */}
           <motion.div
@@ -22,24 +22,21 @@ export default function About() {
             initial="hidden"
             whileInView="show"
             viewport={viewport}
+            className="mb-10 md:mb-12 max-w-2xl"
           >
             <motion.span variants={fadeUp} className="section-label block mb-4">
-              About Us
+              {t('about.heading')}
             </motion.span>
             <motion.h2 variants={fadeUp} className="display-lg text-[var(--navy)] mb-4">
-              {t('about.heading')}
-            </motion.h2>
-            <motion.p variants={fadeUp} className="text-[var(--text-muted)] italic font-serif text-lg mb-8">
               {t('about.sub')}
-            </motion.p>
-
-            <motion.div variants={fadeUp} className="space-y-5 text-[var(--text-secondary)] leading-relaxed">
+            </motion.h2>
+            <motion.div variants={fadeUp} className="space-y-4 md:space-y-5 text-[var(--text-secondary)] leading-relaxed">
               <p>{t('about.p1')}</p>
               <p>{t('about.p2')}</p>
             </motion.div>
 
-            {/* Mission / Vision cards */}
-            <motion.div variants={stagger(0.1)} className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Mission / Vision cards with refined cards */}
+            <motion.div variants={stagger(0.1)} className="mt-8 md:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
                 { labelKey: 'about.mission.label', textKey: 'about.mission.text', accent: 'var(--gold)' },
                 { labelKey: 'about.vision.label', textKey: 'about.vision.text', accent: 'var(--terra)' },
@@ -47,12 +44,13 @@ export default function About() {
                 <motion.div
                   key={card.labelKey}
                   variants={fadeUp}
-                  className="rounded-xl p-6 border"
+                  className="rounded-xl p-5 md:p-6 border transition-all duration-300 hover:shadow-[var(--shadow-sm)] hover:-translate-y-0.5"
                   style={{
                     background: 'var(--cream)',
                     borderColor: 'var(--cream-dark)',
-                    borderLeftColor: card.accent,
                     borderLeftWidth: '3px',
+                    borderLeftStyle: 'solid',
+                    borderLeftColor: card.accent,
                   }}
                 >
                   <p className="text-xs uppercase tracking-widest font-semibold mb-2"

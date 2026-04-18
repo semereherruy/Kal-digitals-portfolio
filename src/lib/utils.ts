@@ -1,9 +1,24 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import Lenis from '@studio-freight/lenis';
 
 /** Merge Tailwind classes safely */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+/** Smooth scroll to element using Lenis */
+export function smoothScrollTo(selector: string) {
+  if (typeof window === 'undefined') return;
+  const el = document.querySelector(selector);
+  if (el) {
+    const lenis = (window as unknown as { lenis?: Lenis }).lenis;
+    if (lenis) {
+      lenis.scrollTo(selector);
+    } else {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 }
 
 /** Framer Motion reusable variants */

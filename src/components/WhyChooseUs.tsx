@@ -19,7 +19,7 @@ export default function WhyChooseUs() {
   const { t } = useLanguage();
 
   return (
-    <section id="why-us" className="py-28" style={{ background: 'var(--white)' }}>
+    <section id="why-us" className="section" style={{ background: 'var(--white)' }}>
       <div className="container-site">
         {/* Header */}
         <motion.div
@@ -27,7 +27,7 @@ export default function WhyChooseUs() {
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          className="mb-20 text-center max-w-2xl mx-auto"
+          className="mb-12 md:mb-16 text-center max-w-2xl mx-auto"
         >
           <motion.span variants={fadeUp} className="section-label block mb-4">
             Why Us

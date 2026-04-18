@@ -10,7 +10,7 @@ export default function Testimonials() {
   const { t } = useLanguage();
 
   return (
-    <section id="testimonials" className="py-28" style={{ background: 'var(--white)' }}>
+    <section id="testimonials" className="section" style={{ background: 'var(--white)' }}>
       <div className="container-site">
         {/* Header */}
         <motion.div
@@ -18,7 +18,7 @@ export default function Testimonials() {
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          className="mb-16 text-center max-w-2xl mx-auto"
+          className="mb-12 md:mb-16 text-center max-w-2xl mx-auto"
         >
           <motion.span variants={fadeUp} className="section-label block mb-4">
             Testimonials
@@ -43,11 +43,11 @@ export default function Testimonials() {
             <motion.blockquote
               key={item.id}
               variants={fadeUp}
-              className={`group relative rounded-2xl p-7 transition-all duration-300 hover:shadow-[var(--shadow-md)] border ${
+              className={`group relative rounded-2xl p-7 transition-all duration-300 hover:shadow-[var(--shadow-lg)] hover:-translate-y-1 border ${
                 i % 2 === 1 ? 'md:translate-y-6' : ''
               }`}
               style={{
-                background: 'var(--cream)',
+                background: 'var(--white)',
                 borderColor: 'var(--cream-dark)',
               }}
             >
