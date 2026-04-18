@@ -1,18 +1,21 @@
-# Kal Digitals — Agency Landing Page
+# Kal Digitals — Digital Agency Landing Page
 
-**Kal Digitals** is a modern, high-performance digital agency landing page built with Next.js 16, React 19, and Framer Motion. The site features multilingual support (English, Tigrinya & Amharic), premium glassmorphism aesthetics, and interactive 3D elements powered by Three.js.
+**Kal Digitals** is a premium, high-performance digital agency landing page built with Next.js 16, React 19, and Framer Motion. The site features multilingual support (English, Tigrinya & Amharic), modern glassmorphism aesthetics, smooth animations, and interactive 3D elements powered by Three.js.
 
 ---
 
 ## ✨ Features
 
-- 🌐 **Multilingual** — Full support for English, Tigrinya, and Amharic
-- 🎬 **Framer Motion Animations** — Smooth entrance, scroll, and micro-interaction animations
-- 🌌 **3D Visuals** — React Three Fiber / Drei powered 3D hero section
-- 🎨 **Premium UI** — Glassmorphism cards, gradient typography, and dark-mode-first design
-- 📱 **Fully Responsive** — Mobile, tablet, and desktop layouts
-- ⚡ **Next.js 16 App Router** — File-based routing with React Server Components
-- 🧩 **TailwindCSS v4** — Utility-first styling with modern PostCSS pipeline
+- 🌐 **Multilingual** — Full support for English, Tigrinya, and Amharic with language switching
+- 🎬 **Framer Motion Animations** — Smooth entrance, scroll-triggered, and micro-interaction animations
+- 🌌 **3D Visuals** — Immersive React Three Fiber / Drei powered 3D hero section
+- 🎨 **Premium UI** — Glassmorphism cards, gradient surfaces, and refined color palette (navy, cream, gold)
+- 📱 **Fully Responsive** — Optimized for mobile, tablet, and desktop
+- ⚡ **Next.js 16 App Router** — Modern React Server Components with Turbopack
+- 🧩 **TailwindCSS v4** — Utility-first styling with CSS custom properties (design tokens)
+- 💬 **Modern Contact Form** — Glassmorphism form with input animations, validation, and status feedback
+- 🦶 **Polished Footer** — Multi-column layout with social links, navigation, and smooth hover effects
+- 🔄 **Smooth Scrolling** — Lenis-powered buttery smooth scroll navigation
 
 ---
 
@@ -20,15 +23,17 @@
 
 | Technology | Version | Purpose |
 |---|---|---|
-| Next.js | 16.2.3 | React framework & routing |
+| Next.js | 16.2.3 | React framework with App Router |
 | React | 19.2.4 | UI library |
 | TypeScript | ^5 | Type safety |
-| TailwindCSS | ^4 | Styling |
-| Framer Motion | ^12 | Animations |
-| Three.js | ^0.183 | 3D rendering |
+| TailwindCSS | ^4 | Utility-first styling |
+| Framer Motion | ^12 | Animations & transitions |
+| Three.js | ^0.183 | 3D rendering engine |
 | React Three Fiber | ^9 | React renderer for Three.js |
 | Drei | ^10 | Three.js helper components |
-| Lucide React | ^1 | Icon set |
+| Lucide React | ^1 | Icon library |
+| Clsx | ^2 | Conditional classnames |
+| Tailwind Merge | ^3 | Tailwind class merging |
 
 ---
 
@@ -70,16 +75,39 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 ```
 kaldigitals/
-├── public/               # Static assets (images, fonts, icons)
+├── public/                    # Static assets (images, fonts, icons)
 ├── src/
-│   ├── app/              # Next.js App Router pages & layouts
-│   ├── components/       # Reusable UI components
-│   │   ├── Hero.tsx      # 3D animated hero section
-│   │   └── ...           # Other sections (Services, Portfolio, etc.)
-│   └── styles/           # Global CSS and design tokens
-├── next.config.ts        # Next.js configuration
-├── tailwind.config.*     # TailwindCSS configuration
-└── tsconfig.json         # TypeScript configuration
+│   ├── app/                   # Next.js App Router (pages, layouts, globals.css)
+│   │   ├── layout.tsx         # Root layout with font configuration
+│   │   ├── page.tsx           # Homepage (assembles all sections)
+│   │   └── globals.css        # Global styles + design tokens
+│   ├── components/            # Reusable UI components
+│   │   ├── Hero.tsx           # 3D animated hero section
+│   │   ├── Navbar.tsx         # Fixed navigation bar
+│   │   ├── Contact.tsx        # Modern glassmorphism contact form
+│   │   ├── Footer.tsx         # Enhanced multi-column footer
+│   │   ├── Services.tsx       # Services showcase
+│   │   ├── Portfolio.tsx      # Work gallery
+│   │   ├── About.tsx          # About section
+│   │   ├── Process.tsx        # Workflow steps
+│   │   ├── WhyChooseUs.tsx    # Value propositions
+│   │   ├── Testimonials.tsx   # Client testimonials
+│   │   ├── TrustStrip.tsx     # Trust indicators
+│   │   ├── CTA.tsx            # Call-to-action banner
+│   │   └── ui/                # Base UI components (Skeleton, etc.)
+│   ├── contexts/              # React contexts
+│   │   └── LanguageContext.tsx # i18n provider
+│   ├── data/                  # Static content
+│   │   └── siteContent.ts     # Contact info & copy for all languages
+│   ├── lib/                   # Shared utilities
+│   │   └── utils.ts           # cn, smoothScrollTo, Framer Motion variants
+│   └── types/                 # TypeScript types (if present)
+├── .eslintrc.json             # ESLint configuration
+├── next.config.ts             # Next.js configuration
+├── tailwind.config.*          # TailwindCSS configuration (if present)
+├── tsconfig.json              # TypeScript configuration
+├── package.json               # Dependencies & scripts
+└── README.md                  # Project documentation
 ```
 
 ---
@@ -88,10 +116,10 @@ kaldigitals/
 
 | Command | Description |
 |---|---|
-| `npm run dev` | Start the local development server |
-| `npm run build` | Create a production build |
-| `npm run start` | Start the production server |
-| `npm run lint` | Run ESLint code checks |
+| `npm run dev` | Start local dev server with Turbopack |
+| `npm run build` | Create optimized production build |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint code quality checks |
 
 ---
 
@@ -103,27 +131,57 @@ The site supports three languages:
 - 🇪🇷 **Tigrinya** (`ti`)
 - 🇪🇹 **Amharic** (`am`)
 
-Language strings are managed via the component-level `translations` object. To add or modify translations, update the relevant section in each component file.
+Language strings are managed via the `translations` object in `src/data/siteContent.ts`. Each component uses the `useLanguage()` hook to access the `t()` function for translations.
+
+To add a new language:
+1. Add language key to the `Language` type in `LanguageContext.tsx`
+2. Extend the `translations` object with translated strings
+3. Language switcher UI (if present) will auto-display new option
+
+---
+
+## 🎨 Design Tokens
+
+The site uses CSS custom properties defined in `globals.css` for consistent theming:
+
+- `--navy`, `--navy-mid`, `--navy-light` — Deep blue palette
+- `--cream`, `--cream-dark` — Warm off-white backgrounds
+- `--gold`, `--gold-light`, `--gold-dim` — Ethiopian-inspired accent
+- `--terra`, `--terra-light` — Terracotta accent color
+- `--teal`, `--teal-light` — Complementary accent
+- `--text-primary`, `--text-secondary`, `--text-muted` — Text colors
+- `--shadow-sm`, `--shadow-md`, `--shadow-lg` — Elevation system
+- `--shadow-gold` — Gold-tinted glow for highlights
+- `--radius-sm` – `--radius-xl` — Border radius scale
+- `--font-sans`, `--font-serif`, `--font-ethiopic` — Typefaces
 
 ---
 
 ## 📦 Deployment
 
-The recommended way to deploy is via **[Vercel](https://vercel.com)**:
+### Vercel (Recommended)
 
 1. Push your code to a GitHub repository.
 2. Import the project at [vercel.com/new](https://vercel.com/new).
-3. Vercel will auto-detect Next.js and configure the build settings.
+3. Vercel auto-detects Next.js and configures the build settings.
 
-Alternatively, you can build and self-host:
+### Self-Hosting
 
 ```bash
 npm run build
 npm run start
 ```
 
+The production server starts at `http://localhost:3000`.
+
 ---
 
 ## 📄 License
 
 This project is proprietary. All rights reserved © Kal Digitals.
+
+---
+
+## 🙋 Support
+
+For issues, feature requests, or collaboration inquiries, reach out via the contact section on the live site or email **hello@kaldigitals.com**.
