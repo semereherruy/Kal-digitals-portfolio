@@ -1,8 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kal Digitals — Agency Landing Page
 
-## Getting Started
+**Kal Digitals** is a modern, high-performance digital agency landing page built with Next.js 16, React 19, and Framer Motion. The site features multilingual support (English, Tigrinya & Amharic), premium glassmorphism aesthetics, and interactive 3D elements powered by Three.js.
 
-First, run the development server:
+---
+
+## ✨ Features
+
+- 🌐 **Multilingual** — Full support for English, Tigrinya, and Amharic
+- 🎬 **Framer Motion Animations** — Smooth entrance, scroll, and micro-interaction animations
+- 🌌 **3D Visuals** — React Three Fiber / Drei powered 3D hero section
+- 🎨 **Premium UI** — Glassmorphism cards, gradient typography, and dark-mode-first design
+- 📱 **Fully Responsive** — Mobile, tablet, and desktop layouts
+- ⚡ **Next.js 16 App Router** — File-based routing with React Server Components
+- 🧩 **TailwindCSS v4** — Utility-first styling with modern PostCSS pipeline
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Version | Purpose |
+|---|---|---|
+| Next.js | 16.2.3 | React framework & routing |
+| React | 19.2.4 | UI library |
+| TypeScript | ^5 | Type safety |
+| TailwindCSS | ^4 | Styling |
+| Framer Motion | ^12 | Animations |
+| Three.js | ^0.183 | 3D rendering |
+| React Three Fiber | ^9 | React renderer for Three.js |
+| Drei | ^10 | Three.js helper components |
+| Lucide React | ^1 | Icon set |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Node.js** v18 or later
+- **npm**, **yarn**, **pnpm**, or **bun**
+
+### Installation
+
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd kaldigitals
+
+# Install dependencies
+npm install
+```
+
+### Running the Development Server
 
 ```bash
 npm run dev
@@ -14,23 +62,68 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📁 Project Structure
 
-## Learn More
+```
+kaldigitals/
+├── public/               # Static assets (images, fonts, icons)
+├── src/
+│   ├── app/              # Next.js App Router pages & layouts
+│   ├── components/       # Reusable UI components
+│   │   ├── Hero.tsx      # 3D animated hero section
+│   │   └── ...           # Other sections (Services, Portfolio, etc.)
+│   └── styles/           # Global CSS and design tokens
+├── next.config.ts        # Next.js configuration
+├── tailwind.config.*     # TailwindCSS configuration
+└── tsconfig.json         # TypeScript configuration
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧾 Available Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the local development server |
+| `npm run build` | Create a production build |
+| `npm run start` | Start the production server |
+| `npm run lint` | Run ESLint code checks |
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🌍 Localization
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The site supports three languages:
+
+- 🇬🇧 **English** (default)
+- 🇪🇷 **Tigrinya** (`ti`)
+- 🇪🇹 **Amharic** (`am`)
+
+Language strings are managed via the component-level `translations` object. To add or modify translations, update the relevant section in each component file.
+
+---
+
+## 📦 Deployment
+
+The recommended way to deploy is via **[Vercel](https://vercel.com)**:
+
+1. Push your code to a GitHub repository.
+2. Import the project at [vercel.com/new](https://vercel.com/new).
+3. Vercel will auto-detect Next.js and configure the build settings.
+
+Alternatively, you can build and self-host:
+
+```bash
+npm run build
+npm run start
+```
+
+---
+
+## 📄 License
+
+This project is proprietary. All rights reserved © Kal Digitals.
